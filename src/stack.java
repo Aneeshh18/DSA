@@ -71,6 +71,7 @@ public class stack {
     }
 
 
+//Push at bottom
     public static void pushAtBottom( Stack<Integer> s, int data ) {
         if(s.isEmpty()){
             s.push(data);
@@ -85,7 +86,7 @@ public class stack {
 
 
 
-
+// Reverse string
     public static String reverseString( String str){
         Stack<Character> s = new Stack<>();
         int idx =0;
@@ -102,6 +103,24 @@ public class stack {
         return result.toString();
     }
 
+
+
+
+
+    // Reverse Stack
+    public static void reverseStack(Stack<Integer> s) {
+        if(s.isEmpty()){
+            return;
+        }
+        int top = s.pop();
+        reverseStack(s);
+        pushAtBottom(s, top);
+    }
+    public static void printStack(Stack<Integer> s) {
+        while(!s.isEmpty()){
+            System.out.println(s.pop());
+        }
+    }
 
 
 
@@ -126,9 +145,13 @@ public class stack {
 
      /*   String str = "abc";
         String result = reverseString(str);
-        System.out.println(result);
-*/
+        System.out.println(result);*/
 
+
+        //Reverse a Stack
+        /*print = 321*/
+        reverseStack(s);
+        printStack(s); //123
     }
 }
 
