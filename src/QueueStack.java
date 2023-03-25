@@ -1,6 +1,5 @@
-import java.util.Queue;
 import java.util.Stack;
-
+//Queue using 2 stack
 public class QueueStack {
 
         static Stack<Integer> s1 = new Stack<>();
@@ -19,12 +18,12 @@ public class QueueStack {
                 s1.push(s2.pop());
             }
         }
-        public int remove(){
+        public void remove(){
             if(isEmpty()){
                 System.out.println("is empty");
-                return -1;
+                return;
             }
-            return s1.pop();
+            s1.pop();
         }
 
         public int peek(){
