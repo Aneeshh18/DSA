@@ -1,11 +1,11 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class BinaryTKlvl {
 
     static class Node{
         int data;
-        BinaryTKlvl.Node left, right;
+        Node left;
+        Node right;
 
         public Node(int data){
             this.data =data;
@@ -47,6 +47,9 @@ public class BinaryTKlvl {
         path.remove(path.size()-1);
         return false;
     }
+
+
+
     public static Node LowestCommonAncestor(Node root, int n1, int n2){       //O(n)
         ArrayList<Node> path1 = new ArrayList<>();
         ArrayList<Node> path2 = new ArrayList<>();
@@ -82,6 +85,8 @@ public class BinaryTKlvl {
     }
 
 
+
+    //min distance
     public static int lcaDis(Node root, int n){
         if (root == null){
             return -1;
@@ -107,6 +112,54 @@ public class BinaryTKlvl {
     }
 
 
+    //Kth ancestor
+    public static int KAncestor( Node root, int n, int k){
+        if(root == null){
+            return -1;
+        }
+        if(root.data == n){
+            return 0;
+        }
+
+        int leftDs = KAncestor(root.left, n , k);
+        int rightDs = KAncestor(root.right, n , k);
+
+        if(leftDs == -1 && rightDs == -1) {
+            return -1;
+        }
+
+        int max = Math.max(leftDs, rightDs);
+        if(max+1 == k){
+            System.out.println(root.data);
+        }
+        return max+1;
+    }
+
+
+    public static int transform(Node root){
+        if (root == null) {
+            return 0;
+        }
+
+        int leftChild = transform(root.left);
+        int rightChild = transform(root.right);
+
+        int data = root.data;
+
+        int newLeft = root.left == null? 0 : root.left.data;
+        int newRight = root.right == null ? 0 : root.right.data;
+        root.data = newLeft + leftChild + newRight + rightChild;
+        return data;
+    }
+
+    public static void preorder(Node root){
+        if (root == null){
+            return;
+        }
+        System.out.print(root.data + " ");
+        preorder(root.left);
+        preorder(root.right);
+    }
 
 
     public static void main(String[] args) {
@@ -130,5 +183,11 @@ public class BinaryTKlvl {
 
         System.out.println(lca2(root, n1, n2).data);
         System.out.println(minDis(root, n1, n2));
+
+        int n = 5, kA = 2;
+        KAncestor(root, n , kA);
+
+        transform(root);
+        preorder(root);
     }
 }
