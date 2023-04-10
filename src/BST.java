@@ -136,9 +136,32 @@ public class BST {
 
     }
 
+    //Mirror
+    public static Node createMirror(Node root){
+        if(root == null){
+            return null;
+        }
+
+        Node leftMirror = createMirror(root.left);
+        Node rightMirror = createMirror(root.right);
+
+        root.left = rightMirror;
+        root.right = leftMirror;
+        return root;
+    }
+    public static void preorder(Node root){
+        if(root == null){
+            return;
+        }
+        System.out.print(root.data+" ");
+        preorder(root.left);
+        preorder(root.right);
+    }
+
 
     public static void main( String[] args ) {
-        int[] values = { /*5, 1, 3, 4, 2, 1 */ 8,5,3,1,4,6,10,11,14};
+        /*int[] values = { *//*5, 1, 3, 4, 2, 1 *//* 8,5,3,1,4,6,10,11,14};*/
+        int[] values= {8,5,10,3,6,11};  //for mirror
         Node root = null;
 
         for (int i = 0; i < values.length; i++) {
@@ -166,5 +189,8 @@ public class BST {
         } else {
             System.out.println(" not valid");
         }
+
+        root = createMirror(root);
+        preorder(root);
     }
 }
